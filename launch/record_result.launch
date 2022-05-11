@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<launch>
+  <arg name="home_path"     default="$(optenv HOME /home/rui)"/>
+  <arg name="dataset_name"  default="aloam_result" />
+  <arg name="dataset_path"  default="$(arg home_path)/ds/Jackal/evora25nov2021" />
+
+
+  
+  <node pkg="rosbag"
+        type="record"
+        output="screen"
+        name="dataset_recorder_basic_sensors"
+        args="
+      /velodyne_points
+      /aft_mapped_path
+      /laser_cloud_surround
+      /laser_cloud_map
+      /tf
+      /tf_static
+        
+        -o $(arg dataset_path)/$(arg dataset_name)"
+  />
+    
+   
+
+</launch>

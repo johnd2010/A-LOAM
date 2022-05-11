@@ -40,25 +40,34 @@ Download [NSH indoor outdoor](https://drive.google.com/file/d/1s05tBQOLNEDDurlg4
     rosbag play YOUR_DATASET_FOLDER/nsh_indoor_outdoor.bag
 ```
 
+## 4. DURABLE Usage
+### 4.1 Record a rosbag around the mapping area
+Drive around the area to map recording at least the pointcloud from the velodyne (/velodyne_points). It is suggested the robot starts this bag facing East. While you are driving the robot try to have the world static and be sure to be close to the robot so your presence can be filtered from the map.
 
-## 4. KITTI Example (Velodyne HDL-64)
-Download [KITTI Odometry dataset](http://www.cvlibs.net/datasets/kitti/eval_odometry.php) to YOUR_DATASET_FOLDER and set the `dataset_folder` and `sequence_number` parameters in `kitti_helper.launch` file. Note you also convert KITTI dataset to bag file for easy use by setting proper parameters in `kitti_helper.launch`. 
+### 4.2 Tune Parameters
+Tune the parameters in the launch file *durable.launch*, including the minimum distance to create the map (the max distance you were from the robot).
+
+### 4.3 Launch A-Loam
+To generate the map open two terminals, in the first one launch the a-loam algorithm:
 
 ```
-    roslaunch aloam_velodyne aloam_velodyne_HDL_64.launch
-    roslaunch aloam_velodyne kitti_helper.launch
+    roslaunch aloam_velodyne durable.launch
 ```
-<img src="https://github.com/HKUST-Aerial-Robotics/A-LOAM/blob/devel/picture/kitti_gif.gif" width = 720 height = 351 />
 
-## 5. Docker Support
-To further facilitate the building process, we add docker in our code. Docker environment is like a sandbox, thus makes our code environment-independent. To run with docker, first make sure [ros](http://wiki.ros.org/ROS/Installation) and [docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/) are installed on your machine. Then add your account to `docker` group by `sudo usermod -aG docker $YOUR_USER_NAME`. **Relaunch the terminal or logout and re-login if you get `Permission denied` error**, type:
+In the second one run the bag you recorded to generate the map:
+
 ```
-cd ~/catkin_ws/src/A-LOAM/docker
-make build
+    rosbag play YOUR_DATASET_FOLDER/YOUR_BAG.bag
 ```
-The build process may take a while depends on your machine. After that, run `./run.sh 16` or `./run.sh 64` to launch A-LOAM, then you should be able to see the result.
+### 4.3 Save the data
+The map is published to a topic /laser_cloud_map so, in order to save it, we will record the last seconds of the mapping. When the mapping is close to be completed (the bag you are playing is 10-15 seconds away from finishing) record the map and other topics by running:
+```
+    roslaunch aloam_velodyne record_result.launch
+```
+This will save the result of a-loam in a rosbag file.
 
+**NOTE:** - You should configure the path where the rosbag will be recorded inside **record_result.launch**.
 
-## 6.Acknowledgements
+## 5.Acknowledgements
 Thanks for LOAM(J. Zhang and S. Singh. LOAM: Lidar Odometry and Mapping in Real-time) and [LOAM_NOTED](https://github.com/cuitaixiang/LOAM_NOTED).
 
