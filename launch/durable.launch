@@ -6,7 +6,7 @@
     <param name="mapping_skip_frame" type="int" value="1" />
 
     <!-- remove too closed points -->
-    <param name="minimum_range" type="double" value="2"/> <!--default 0.3 we used 3 before in evora-->
+    <param name="minimum_range" type="double" value="3"/> <!--default 0.3 we used 3 before in evora-->
 
     <param name="map_frame" type="string" value="map3d"/> <!-- Name of the origin frame of the map-->
 
