@@ -82,6 +82,7 @@ bool PUB_EACH_LINE = false;
 
 double MINIMUM_RANGE = 0.1;
 std::string MAP_FRAME = "map3d";
+std::string NAME_SPACE;
 
 template <typename PointT>
 void removeClosedPointCloud(const pcl::PointCloud<PointT> &cloud_in,
@@ -473,7 +474,8 @@ void laserCloudHandler(const sensor_msgs::PointCloud2ConstPtr &laserCloudMsg)
 
 int main(int argc, char **argv)
 {
-    ros::init(argc, argv, "scanRegistration");
+    std::string middle(argv[1]);
+    ros::init(argc, argv, "/scanRegistration");
     ros::NodeHandle nh;
 
     nh.param<int>("scan_line", N_SCANS, 16);
@@ -490,25 +492,27 @@ int main(int argc, char **argv)
         return 0;
     }
 
-    ros::Subscriber subLaserCloud = nh.subscribe<sensor_msgs::PointCloud2>("/velodyne_points", 100, laserCloudHandler);
+    
 
-    pubLaserCloud = nh.advertise<sensor_msgs::PointCloud2>("/velodyne_cloud_2", 100);
+    ros::Subscriber subLaserCloud = nh.subscribe<sensor_msgs::PointCloud2>("/"+middle+"/velodyne_points", 100, laserCloudHandler);
 
-    pubCornerPointsSharp = nh.advertise<sensor_msgs::PointCloud2>("/laser_cloud_sharp", 100);
+    pubLaserCloud = nh.advertise<sensor_msgs::PointCloud2>("/"+middle+"/velodyne_cloud_2", 100);
 
-    pubCornerPointsLessSharp = nh.advertise<sensor_msgs::PointCloud2>("/laser_cloud_less_sharp", 100);
+    pubCornerPointsSharp = nh.advertise<sensor_msgs::PointCloud2>("/"+middle+"/laser_cloud_sharp", 100);
 
-    pubSurfPointsFlat = nh.advertise<sensor_msgs::PointCloud2>("/laser_cloud_flat", 100);
+    pubCornerPointsLessSharp = nh.advertise<sensor_msgs::PointCloud2>("/"+middle+"/laser_cloud_less_sharp", 100);
 
-    pubSurfPointsLessFlat = nh.advertise<sensor_msgs::PointCloud2>("/laser_cloud_less_flat", 100);
+    pubSurfPointsFlat = nh.advertise<sensor_msgs::PointCloud2>("/"+middle+"/laser_cloud_flat", 100);
 
-    pubRemovePoints = nh.advertise<sensor_msgs::PointCloud2>("/laser_remove_points", 100);
+    pubSurfPointsLessFlat = nh.advertise<sensor_msgs::PointCloud2>("/"+middle+"/laser_cloud_less_flat", 100);
+
+    pubRemovePoints = nh.advertise<sensor_msgs::PointCloud2>("/"+middle+"/laser_remove_points", 100);
 
     if(PUB_EACH_LINE)
     {
         for(int i = 0; i < N_SCANS; i++)
         {
-            ros::Publisher tmp = nh.advertise<sensor_msgs::PointCloud2>("/laser_scanid_" + std::to_string(i), 100);
+            ros::Publisher tmp = nh.advertise<sensor_msgs::PointCloud2>("/"+middle+"/laser_scanid_" + std::to_string(i), 100);
             pubEachScan.push_back(tmp);
         }
     }

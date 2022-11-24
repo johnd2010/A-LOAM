@@ -897,6 +897,7 @@ void process()
 
 int main(int argc, char **argv)
 {
+	std::string middle(argv[1]);
 	ros::init(argc, argv, "laserMapping");
 	ros::NodeHandle nh;
 
@@ -911,25 +912,25 @@ int main(int argc, char **argv)
 	downSizeFilterCorner.setLeafSize(lineRes, lineRes,lineRes);
 	downSizeFilterSurf.setLeafSize(planeRes, planeRes, planeRes);
 
-	ros::Subscriber subLaserCloudCornerLast = nh.subscribe<sensor_msgs::PointCloud2>("/laser_cloud_corner_last", 100, laserCloudCornerLastHandler);
+	ros::Subscriber subLaserCloudCornerLast = nh.subscribe<sensor_msgs::PointCloud2>("/"+middle+"/laser_cloud_corner_last", 100, laserCloudCornerLastHandler);
 
-	ros::Subscriber subLaserCloudSurfLast = nh.subscribe<sensor_msgs::PointCloud2>("/laser_cloud_surf_last", 100, laserCloudSurfLastHandler);
+	ros::Subscriber subLaserCloudSurfLast = nh.subscribe<sensor_msgs::PointCloud2>("/"+middle+"/laser_cloud_surf_last", 100, laserCloudSurfLastHandler);
 
-	ros::Subscriber subLaserOdometry = nh.subscribe<nav_msgs::Odometry>("/laser_odom_to_init", 100, laserOdometryHandler);
+	ros::Subscriber subLaserOdometry = nh.subscribe<nav_msgs::Odometry>("/"+middle+"/laser_odom_to_init", 100, laserOdometryHandler);
 
-	ros::Subscriber subLaserCloudFullRes = nh.subscribe<sensor_msgs::PointCloud2>("/velodyne_cloud_3", 100, laserCloudFullResHandler);
+	ros::Subscriber subLaserCloudFullRes = nh.subscribe<sensor_msgs::PointCloud2>("/"+middle+"/velodyne_cloud_3", 100, laserCloudFullResHandler);
 
-	pubLaserCloudSurround = nh.advertise<sensor_msgs::PointCloud2>("/laser_cloud_surround", 100);
+	pubLaserCloudSurround = nh.advertise<sensor_msgs::PointCloud2>("/"+middle+"/laser_cloud_surround", 100);
 
-	pubLaserCloudMap = nh.advertise<sensor_msgs::PointCloud2>("/laser_cloud_map", 100);
+	pubLaserCloudMap = nh.advertise<sensor_msgs::PointCloud2>("/"+middle+"/laser_cloud_map", 100);
 
-	pubLaserCloudFullRes = nh.advertise<sensor_msgs::PointCloud2>("/velodyne_cloud_registered", 100);
+	pubLaserCloudFullRes = nh.advertise<sensor_msgs::PointCloud2>("/"+middle+"/velodyne_cloud_registered", 100);
 
-	pubOdomAftMapped = nh.advertise<nav_msgs::Odometry>("/aft_mapped_to_init", 100);
+	pubOdomAftMapped = nh.advertise<nav_msgs::Odometry>("/"+middle+"/aft_mapped_to_init", 100);
 
-	pubOdomAftMappedHighFrec = nh.advertise<nav_msgs::Odometry>("/aft_mapped_to_init_high_frec", 100);
+	pubOdomAftMappedHighFrec = nh.advertise<nav_msgs::Odometry>("/"+middle+"/aft_mapped_to_init_high_frec", 100);
 
-	pubLaserAfterMappedPath = nh.advertise<nav_msgs::Path>("/aft_mapped_path", 100);
+	pubLaserAfterMappedPath = nh.advertise<nav_msgs::Path>("/"+middle+"/aft_mapped_path", 100);
 
 	for (int i = 0; i < laserCloudNum; i++)
 	{

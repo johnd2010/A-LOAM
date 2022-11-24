@@ -1,0 +1,21 @@
+<launch>
+    
+    <include file="$(find aloam_velodyne)/launch/durable.launch">
+      <arg name="ns" value="J1" />
+    </include>
+
+    <include file="$(find aloam_velodyne)/launch/durable.launch">
+      <arg name="ns" value="J2" />
+    </include>
+
+    <arg name="rviz" default="true" />
+    <group if="$(arg rviz)">
+        <node ns="J1" launch-prefix="nice" pkg="rviz" type="rviz" name="rviz" args="-d $(find aloam_velodyne)/rviz_cfg/J1_aloam_velodyne.rviz" />
+    </group>
+
+    <group if="$(arg rviz)">
+        <node ns="J2" launch-prefix="nice" pkg="rviz" type="rviz" name="rviz" args="-d $(find aloam_velodyne)/rviz_cfg/J2_aloam_velodyne.rviz" />
+    </group>
+
+
+</launch>

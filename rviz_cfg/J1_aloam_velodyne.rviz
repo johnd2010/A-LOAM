@@ -8,8 +8,15 @@ Panels:
         - /Status1
         - /odometry1/odomPath1
         - /odometry1/PointCloud21
-      Splitter Ratio: 0.5
-    Tree Height: 775
+        - /mapping1
+        - /mapping1/allMapCloud1
+        - /mapping1/corner1
+        - /PointCloud21
+        - /PointCloud22
+        - /PointCloud23
+        - /PointCloud24
+      Splitter Ratio: 0.498951793
+    Tree Height: 747
   - Class: rviz/Selection
     Name: Selection
   - Class: rviz/Tool Properties
@@ -28,7 +35,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: ""
+    SyncSource: currPoints
 Toolbars:
   toolButtonStyle: 2
 Visualization Manager:
@@ -188,7 +195,7 @@ Visualization Manager:
           Radius: 0.0299999993
           Shaft Diameter: 0.100000001
           Shaft Length: 0.100000001
-          Topic: /aft_mapped_path
+          Topic: /J1/aft_mapped_path
           Unreliable: false
           Value: true
         - Alpha: 1
@@ -200,7 +207,7 @@ Visualization Manager:
           Axis: Z
           Channel Name: intensity
           Class: rviz/PointCloud2
-          Color: 255; 255; 255
+          Color: 0; 0; 255
           Color Transformer: FlatColor
           Decay Time: 0
           Enabled: true
@@ -214,9 +221,9 @@ Visualization Manager:
           Queue Size: 10
           Selectable: true
           Size (Pixels): 3
-          Size (m): 0.0500000007
+          Size (m): 0.5
           Style: Flat Squares
-          Topic: /laser_cloud_map
+          Topic: /J1/laser_cloud_map
           Unreliable: false
           Use Fixed Frame: true
           Use rainbow: true
@@ -233,7 +240,7 @@ Visualization Manager:
           Color: 255; 255; 255
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: true
+          Enabled: false
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 15
@@ -246,11 +253,11 @@ Visualization Manager:
           Size (Pixels): 1
           Size (m): 0.0500000007
           Style: Squares
-          Topic: /laser_cloud_surround
+          Topic: /J1/laser_cloud_surround
           Unreliable: false
           Use Fixed Frame: true
           Use rainbow: true
-          Value: true
+          Value: false
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -266,9 +273,9 @@ Visualization Manager:
           Enabled: true
           Invert Rainbow: false
           Max Color: 255; 255; 255
-          Max Intensity: 15.1000004
+          Max Intensity: 15.0742264
           Min Color: 0; 0; 0
-          Min Intensity: 0
+          Min Intensity: -0.0249732789
           Name: currPoints
           Position Transformer: XYZ
           Queue Size: 10
@@ -276,7 +283,7 @@ Visualization Manager:
           Size (Pixels): 2
           Size (m): 0.00999999978
           Style: Points
-          Topic: /velodyne_cloud_registered
+          Topic: /J1/velodyne_cloud_registered
           Unreliable: false
           Use Fixed Frame: true
           Use rainbow: true
@@ -653,161 +660,138 @@ Visualization Manager:
       Unreliable: false
       Value: false
     - Class: rviz/TF
-      Enabled: true
+      Enabled: false
       Frame Timeout: 15
       Frames:
         All Enabled: true
-        J1/base_link:
-          Value: true
-        J1/chassis_link:
-          Value: true
-        J1/fenders_link:
-          Value: true
-        J1/front_left_wheel_link:
-          Value: true
-        J1/front_mount:
-          Value: true
-        J1/front_right_wheel_link:
-          Value: true
-        J1/gt_link:
-          Value: true
-        J1/gt_local_link:
-          Value: true
-        J1/imu_link:
-          Value: true
-        J1/land_pad:
-          Value: true
-        J1/mid_mount:
-          Value: true
-        J1/navsat_link:
-          Value: true
-        J1/odom:
-          Value: true
-        J1/rear_left_wheel_link:
-          Value: true
-        J1/rear_mount:
-          Value: true
-        J1/rear_right_wheel_link:
-          Value: true
-        J1/velodyne:
-          Value: true
-        J1/velodyne_base_link:
-          Value: true
-        J2/base_link:
-          Value: true
-        J2/chassis_link:
-          Value: true
-        J2/fenders_link:
-          Value: true
-        J2/front_left_wheel_link:
-          Value: true
-        J2/front_mount:
-          Value: true
-        J2/front_right_wheel_link:
-          Value: true
-        J2/gt_link:
-          Value: true
-        J2/gt_local_link:
-          Value: true
-        J2/imu_link:
-          Value: true
-        J2/land_pad:
-          Value: true
-        J2/mid_mount:
-          Value: true
-        J2/navsat_link:
-          Value: true
-        J2/odom:
-          Value: true
-        J2/rear_left_wheel_link:
-          Value: true
-        J2/rear_mount:
-          Value: true
-        J2/rear_right_wheel_link:
-          Value: true
-        J2/velodyne:
-          Value: true
-        J2/velodyne_base_link:
-          Value: true
-        map:
-          Value: true
-        map3d:
-          Value: true
-        utm:
-          Value: true
       Marker Scale: 1
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: true
       Tree:
-        utm:
-          map:
-            J1/odom:
-              J1/base_link:
-                J1/chassis_link:
-                  J1/fenders_link:
-                    {}
-                  J1/front_left_wheel_link:
-                    {}
-                  J1/front_right_wheel_link:
-                    {}
-                  J1/gt_link:
-                    {}
-                  J1/imu_link:
-                    {}
-                  J1/mid_mount:
-                    J1/front_mount:
-                      {}
-                    J1/rear_mount:
-                      {}
-                  J1/navsat_link:
-                    {}
-                  J1/rear_left_wheel_link:
-                    {}
-                  J1/rear_right_wheel_link:
-                    {}
-                J1/gt_local_link:
-                  {}
-                J1/land_pad:
-                  {}
-                J1/velodyne_base_link:
-                  J1/velodyne:
-                    {}
-            J2/odom:
-              J2/base_link:
-                J2/chassis_link:
-                  J2/fenders_link:
-                    {}
-                  J2/front_left_wheel_link:
-                    {}
-                  J2/front_right_wheel_link:
-                    {}
-                  J2/gt_link:
-                    {}
-                  J2/imu_link:
-                    {}
-                  J2/mid_mount:
-                    J2/front_mount:
-                      {}
-                    J2/rear_mount:
-                      {}
-                  J2/navsat_link:
-                    {}
-                  J2/rear_left_wheel_link:
-                    {}
-                  J2/rear_right_wheel_link:
-                    {}
-                J2/gt_local_link:
-                  {}
-                J2/land_pad:
-                  {}
-                J2/velodyne_base_link:
-                  J2/velodyne:
-                    {}
-            map3d:
-              {}
+        {}
       Update Interval: 0
+      Value: false
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz/PointCloud2
+      Color: 0; 0; 255
+      Color Transformer: FlatColor
+      Decay Time: 0
+      Enabled: false
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Max Intensity: 4096
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: PointCloud2
+      Position Transformer: XYZ
+      Queue Size: 10
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 0.5
+      Style: Flat Squares
+      Topic: /J12_process_pcl
+      Unreliable: false
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: false
+    - Alpha: 0.5
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz/PointCloud2
+      Color: 255; 0; 0
+      Color Transformer: FlatColor
+      Decay Time: 0
+      Enabled: false
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Max Intensity: 4096
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: PointCloud2
+      Position Transformer: XYZ
+      Queue Size: 10
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 0.300000012
+      Style: Flat Squares
+      Topic: /2J1_process_pcl_tx
+      Unreliable: false
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: false
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz/PointCloud2
+      Color: 255; 0; 0
+      Color Transformer: FlatColor
+      Decay Time: 0
+      Enabled: false
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Max Intensity: 4096
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: PointCloud2
+      Position Transformer: XYZ
+      Queue Size: 10
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 0.5
+      Style: Flat Squares
+      Topic: /2J1_process_pcl_tx_all
+      Unreliable: false
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: false
+    - Alpha: 0.0500000007
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz/PointCloud2
+      Color: 255; 255; 255
+      Color Transformer: FlatColor
+      Decay Time: 0
+      Enabled: true
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Max Intensity: 4096
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: PointCloud2
+      Position Transformer: XYZ
+      Queue Size: 10
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 1
+      Style: Flat Squares
+      Topic: /J1_full_map
+      Unreliable: false
+      Use Fixed Frame: true
+      Use rainbow: true
       Value: true
   Enabled: true
   Global Options:
@@ -834,35 +818,35 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/XYOrbit
-      Distance: 28.5942478
+      Distance: 299.962311
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.675796986
-        Y: 1.08226371
-        Z: -2.30979848
+        X: 31.7745018
+        Y: -2.50550365
+        Z: -2.30986047
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.0500000007
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.244797006
+      Pitch: 1.56979632
       Target Frame: body
       Value: XYOrbit (rviz)
-      Yaw: 1.92181349
+      Yaw: 3.06682372
     Saved: ~
 Window Geometry:
   Displays:
-    collapsed: false
-  Height: 1056
-  Hide Left Dock: false
+    collapsed: true
+  Height: 1028
+  Hide Left Dock: true
   Hide Right Dock: true
   Image:
     collapsed: false
-  QMainWindow State: 000000ff00000000fd00000004000000000000016a00000396fc0200000009fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006100fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000002800000396000000d700fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000000a0049006d00610067006500000002f4000000ca0000001600ffffff000000010000010f00000396fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000002800000396000000ad00fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e100000197000000030000073f0000003efc0100000002fb0000000800540069006d006501000000000000073f0000030000fffffffb0000000800540069006d00650100000000000004500000000000000000000005cf0000039600000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd0000000400000000000001ec0000037afc0200000009fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006100fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c00610079007300000000280000037a000000d700fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000000a0049006d00610067006500000002f4000000ca0000001600ffffff00000001000001110000037afc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a0056006900650077007300000000280000037a000000ad00fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000003a10000003efc0100000002fb0000000800540069006d00650100000000000003a10000030000fffffffb0000000800540069006d00650100000000000004500000000000000000000003a10000037a00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
@@ -871,6 +855,6 @@ Window Geometry:
     collapsed: false
   Views:
     collapsed: true
-  Width: 1855
+  Width: 929
   X: 65
   Y: 24

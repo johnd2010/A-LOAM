@@ -187,33 +187,35 @@ void laserCloudFullResHandler(const sensor_msgs::PointCloud2ConstPtr &laserCloud
 
 int main(int argc, char **argv)
 {
+    std::string middle(argv[1]);
     ros::init(argc, argv, "laserOdometry");
     ros::NodeHandle nh;
+    
 
     nh.param<int>("mapping_skip_frame", skipFrameNum, 2);
     nh.param<std::string>("map_frame", MAP_FRAME, "map3d");
 
     printf("Mapping %d Hz \n", 10 / skipFrameNum);
 
-    ros::Subscriber subCornerPointsSharp = nh.subscribe<sensor_msgs::PointCloud2>("/laser_cloud_sharp", 100, laserCloudSharpHandler);
+    ros::Subscriber subCornerPointsSharp = nh.subscribe<sensor_msgs::PointCloud2>("/"+middle+"/laser_cloud_sharp", 100, laserCloudSharpHandler);
 
-    ros::Subscriber subCornerPointsLessSharp = nh.subscribe<sensor_msgs::PointCloud2>("/laser_cloud_less_sharp", 100, laserCloudLessSharpHandler);
+    ros::Subscriber subCornerPointsLessSharp = nh.subscribe<sensor_msgs::PointCloud2>("/"+middle+"/laser_cloud_less_sharp", 100, laserCloudLessSharpHandler);
 
-    ros::Subscriber subSurfPointsFlat = nh.subscribe<sensor_msgs::PointCloud2>("/laser_cloud_flat", 100, laserCloudFlatHandler);
+    ros::Subscriber subSurfPointsFlat = nh.subscribe<sensor_msgs::PointCloud2>("/"+middle+"/laser_cloud_flat", 100, laserCloudFlatHandler);
 
-    ros::Subscriber subSurfPointsLessFlat = nh.subscribe<sensor_msgs::PointCloud2>("/laser_cloud_less_flat", 100, laserCloudLessFlatHandler);
+    ros::Subscriber subSurfPointsLessFlat = nh.subscribe<sensor_msgs::PointCloud2>("/"+middle+"/laser_cloud_less_flat", 100, laserCloudLessFlatHandler);
 
-    ros::Subscriber subLaserCloudFullRes = nh.subscribe<sensor_msgs::PointCloud2>("/velodyne_cloud_2", 100, laserCloudFullResHandler);
+    ros::Subscriber subLaserCloudFullRes = nh.subscribe<sensor_msgs::PointCloud2>("/"+middle+"/velodyne_cloud_2", 100, laserCloudFullResHandler);
 
-    ros::Publisher pubLaserCloudCornerLast = nh.advertise<sensor_msgs::PointCloud2>("/laser_cloud_corner_last", 100);
+    ros::Publisher pubLaserCloudCornerLast = nh.advertise<sensor_msgs::PointCloud2>("/"+middle+"/laser_cloud_corner_last", 100);
 
-    ros::Publisher pubLaserCloudSurfLast = nh.advertise<sensor_msgs::PointCloud2>("/laser_cloud_surf_last", 100);
+    ros::Publisher pubLaserCloudSurfLast = nh.advertise<sensor_msgs::PointCloud2>("/"+middle+"/laser_cloud_surf_last", 100);
 
-    ros::Publisher pubLaserCloudFullRes = nh.advertise<sensor_msgs::PointCloud2>("/velodyne_cloud_3", 100);
+    ros::Publisher pubLaserCloudFullRes = nh.advertise<sensor_msgs::PointCloud2>("/"+middle+"/velodyne_cloud_3", 100);
 
-    ros::Publisher pubLaserOdometry = nh.advertise<nav_msgs::Odometry>("/laser_odom_to_init", 100);
+    ros::Publisher pubLaserOdometry = nh.advertise<nav_msgs::Odometry>("/"+middle+"/laser_odom_to_init", 100);
 
-    ros::Publisher pubLaserPath = nh.advertise<nav_msgs::Path>("/laser_odom_path", 100);
+    ros::Publisher pubLaserPath = nh.advertise<nav_msgs::Path>("/"+middle+"/laser_odom_path", 100);
 
     nav_msgs::Path laserPath;
 
